@@ -22,4 +22,4 @@ const URLNotFound = () => {
   );
 };
 
-export default URLNotFound;
+export { URLNotFound };

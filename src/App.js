@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import ExperimenterLog  from "components/ExperimenterLog";
-import URLNotFound from "components/URLNotFound";
+import { ExperimenterLog }  from "pages/ExperimenterLog";
+import { URLNotFound } from "pages/URLNotFound";
 
 class App extends Component {
   render() {

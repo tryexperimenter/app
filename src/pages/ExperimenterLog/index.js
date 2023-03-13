@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom"
-import { ExperimentObservationsDataService } from "services/ExperimentObservationsDataService";
+import { getObservations } from "services/Observations";
 import { LoadingScreen } from "components/LoadingScreen"
 
 {/* Source:
@@ -8,27 +8,30 @@ https://christophergs.com/tutorials/ultimate-fastapi-tutorial-pt-12-react-js-fro
 */}
 
 const ExperimenterLog = () => {
-  {/*Set variables from parameters passed via the URL*/}
+
+  {/*Create variables from parameters passed via the URL*/}
   const { id } = useParams()
 
-  {/*Set variables that we'll be updating.*/}
+  {/*Create variables that we'll be updating, update methods.*/}
   const [loading, setLoading] = useState(true)
   const [observations, setObservations] = useState([])
 
-  {/*Get Experimenter Observations*/}
+  {/*Get Observations*/}
 
   useEffect(() => {
-    getExperimenterObservations()
-  })
+    getObservationsHelper()
+  }, [])
 
-  const getExperimenterObservations = (id) => {
-    ExperimentObservationsDataService({
-      request_type: "GET",
-      payload: null,
-    }).then((response) => {
+  const getObservationsHelper = () => {
+
+    getObservations({
+      id: id,
+    })
+    
+    .then((response) => {
 
       //Log response
-      console.log("Response from getExperimenterObservations")
+      console.log("Response from getObservations")
       console.log(response)
 
       //Set observations
@@ -46,6 +49,8 @@ const ExperimenterLog = () => {
 
   return (
     <h2 class="text-4xl font-bold mb-2 text-black">
+    ID: {id}
+    <br></br> <br></br>
     First Name: {observations.first_name}
     <br></br> <br></br>
     Experiment: {observations.experiment_name}

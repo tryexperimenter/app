@@ -8,10 +8,10 @@ import { BackendAPI } from "services/APIConnections.js";
 /*getObservations
 Note: We create an async function so that we can use "await" within the function.*/
 async function getObservations({
-  id = null,
+  user_id = null,
 }) {
 
-  const endpoint = "experiment-observations/?id=" + id
+  const endpoint = "experiment-observations/?user_id=" + user_id
 
   console.log("Calling getObservations (from ObservationsDataService) at endpoint:" + endpoint);
   
@@ -33,7 +33,7 @@ async function getObservations({
       console.log("Response:");
       console.log(response);
       dict_base_response["response_status"] = "success";
-      dict_base_response["data"] = response.data.data;
+      dict_base_response["data"] = response.data;
       return dict_base_response;
     })
     /*If API returns an error (or API request times out because API is not accessible), log the response, update the response_dict, and return it to the variable we're creating.*/

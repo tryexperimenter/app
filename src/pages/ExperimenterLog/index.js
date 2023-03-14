@@ -17,14 +17,13 @@ const ExperimenterLog = () => {
   const [observations, setObservations] = useState([])
 
   {/*Get Observations*/}
-
   useEffect(() => {
     getObservationsHelper()
   }, [])
 
   const getObservationsHelper = () => {
 
-    getObservations({
+    /*getObservations({
       id: id,
     })
     
@@ -40,7 +39,11 @@ const ExperimenterLog = () => {
       //Update loading to false since we have data now
       setLoading(false)
 
-    })  
+    })*/  
+
+    setObservations({"first_name":"Tristan","observations":[{"experiment_name":"Celebrate something.","question":"How did this make you feel?","answer":"Tristan - good."},{"experiment_name":"Speak up at a meeting.","question":"How did this make you feel?","answer":"Tristan - bad."}]})
+
+    setLoading(false)
   }
 
   {/*Return loading screen until we have data...*/}
@@ -53,7 +56,7 @@ const ExperimenterLog = () => {
     <br></br> <br></br>
     First Name: {observations.first_name}
     <br></br> <br></br>
-    Experiment: {observations.experiment_name}
+    Experiment Name: {observations.observations[0].experiment_name}
     </h2>
   )
 }

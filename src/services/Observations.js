@@ -11,7 +11,7 @@ async function getObservations({
   user_id = null,
 }) {
 
-  const endpoint = "experiment-observations/?user_id=" + user_id
+  const endpoint = "user-observations/?user_id=" + user_id
 
   console.log("Calling getObservations (from ObservationsDataService) at endpoint:" + endpoint);
   

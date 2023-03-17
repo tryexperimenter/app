@@ -9,7 +9,7 @@ class App extends Component {
       <div>
         <BrowserRouter>
           <Routes>
-            <Route path="/log/:id" element={<ExperimenterLog />} />
+            <Route path="/log/:log_id" element={<ExperimenterLog />} />
             <Route path="*" element={<URLNotFound />} />
           </Routes>
         </BrowserRouter>

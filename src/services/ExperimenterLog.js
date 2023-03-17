@@ -5,15 +5,15 @@ Logic: https://dev.to/nagatodev/consuming-rest-api-in-react-with-axios-7j3
 /*Import our Axios WebsiteAPI function to access our WebsiteAPI.*/
 import { BackendAPI } from "services/APIConnections.js";
 
-/*getObservations
+/*getExperimenterLog
 Note: We create an async function so that we can use "await" within the function.*/
-async function getObservations({
-  user_id = null,
+async function getExperimenterLog({
+  log_id = null,
 }) {
 
-  const endpoint = "user-observations/?user_id=" + user_id
+  const endpoint = "experimenter-log/?log_id=" + log_id
 
-  console.log("Calling getObservations (from ObservationsDataService) at endpoint:" + endpoint);
+  console.log("Calling getExperimenterLog at endpoint:" + endpoint);
   
   //Initialize dictionary of the response from the API
   var dict_base_response = {
@@ -49,4 +49,4 @@ async function getObservations({
 }
 
 
-export { getObservations }
+export { getExperimenterLog }

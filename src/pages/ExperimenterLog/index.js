@@ -56,10 +56,10 @@ const ExperimenterLog = () => {
   //Return page
   return (
     <div>
-    <h2 class="text-4xl font-bold mb-2 text-black">
+    <h1 className="my-2 text-3xl font-bold tracking-tight text-black md:text-5xl">
     Hi {experimenterLog.first_name}, here are your experiment observations: 
     <br></br> <br></br>
-    </h2>
+    </h1>
 
     {/*Display Experiment Groups > Experiment Sub Groups > Experiments > Observations we have data for*/}
     {experimenterLog.experiment_groups.map( (item) => (

@@ -6,7 +6,7 @@ const ExperimentGroup = ({experiment_group, experiment_sub_groups}) => {
     console.log(experiment_sub_groups)
 
     return (
-        <h2 class="text-4xl font-bold mb-2 text-black">
+        <h2 className="my-2 text-2xl font-bold tracking-tight text-black md:text-3xl">
         {experiment_group}
         <br></br> <br></br>
     

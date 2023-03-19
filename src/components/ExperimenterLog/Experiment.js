@@ -10,15 +10,15 @@ const Experiment = ({experiment, observations}) => {
 
     if (observations == "None") {
         return (
-            <h2 class="text-4xl font-bold mb-2 text-black">
+            <p className="mb-4 text-gray-700">
             {experiment}  
             <br></br> <br></br>
-            </h2>
+            </p>
         )
     }
 
     return (
-        <h2 class="text-4xl font-bold mb-2 text-black">
+        <p className="mb-4 text-gray-700">
         {experiment}
         <br></br> <br></br>
     
@@ -27,7 +27,7 @@ const Experiment = ({experiment, observations}) => {
         ))}
 
         <br></br> <br></br>
-        </h2>
+        </p>
     )
 
 

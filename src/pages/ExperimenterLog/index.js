@@ -55,19 +55,28 @@ const ExperimenterLog = () => {
 
   //Return page
   return (
-    <div>
-    <h1 className="my-2 text-3xl font-bold tracking-tight text-black md:text-5xl">
-    Hi {experimenterLog.first_name}, here are your experiment observations: 
-    <br></br> <br></br>
-    </h1>
+    <div class="py-20 bg-white">
+        <div class="container mx-auto px-6 pb-10">
+            <h1 class="text-4xl text-black font-bold md:text-6xl pb-4">
+            Experimenter Log
+            </h1>
+            <h2 className="my-2 text-xl font-bold tracking-tight text-black md:text-3xl">
+            Hi {experimenterLog.first_name}. Welcome back to your Experimenter Log.
+            </h2>
 
-    {/*Display Experiment Groups > Experiment Sub Groups > Experiments > Observations we have data for*/}
-    {experimenterLog.experiment_groups.map( (item) => (
-      <ExperimentGroup 
-        experiment_group={item.experiment_group} 
-        experiment_sub_groups={item.experiment_sub_groups} />
-    ))}
+        </div>
 
+        {/*Display Experiment Groups > Experiment Sub Groups > Experiments > Observations we have data for*/}
+        <div class="container mx-auto px-6">
+
+          {experimenterLog.experiment_groups.map( (item) => (
+            <ExperimentGroup 
+              experiment_group={item.experiment_group} 
+              experiment_sub_groups={item.experiment_sub_groups} />
+          ))}
+
+        </div>
+  
     </div>
   )
 }

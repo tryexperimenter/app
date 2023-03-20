@@ -3,12 +3,16 @@ import React from "react";
 const Observation = ({observation}) => {
 
     return (
-        <p className="mb-4 text-gray-700">
-        Prompt: {observation.observation_prompt}
-        <br></br> <br></br>
-        Answer: {observation.observation}
-        <br></br> <br></br>
-        </p>
+        <div>
+            <div class="p-0.5"></div>
+            <p class="my-2 text-l tracking-tight font-bold text-gray-500 md:text-xl">
+            {observation.observation_prompt}
+            </p>
+            <p class="my-2 text-l tracking-tight text-gray-500 md:text-xl">
+            {observation.observation}
+            </p>
+        </div>
+        
     )
 }
 

@@ -10,24 +10,34 @@ const Experiment = ({experiment, observations}) => {
 
     if (observations == "None") {
         return (
-            <p className="mb-4 text-gray-700">
-            {experiment}  
-            <br></br> <br></br>
-            </p>
+            <div>
+
+                <p class="my-2 text-xl tracking-tight font-bold text-black md:text-2xl">
+                {experiment}
+                </p>
+
+                <div class="p-2"></div>
+
+            </div>
         )
     }
 
     return (
-        <p className="mb-4 text-gray-700">
-        {experiment}
-        <br></br> <br></br>
-    
-        {observations.map( (item) => (
-            <Observation observation={item} />
-        ))}
 
-        <br></br> <br></br>
-        </p>
+        <div>
+            
+            <p class="my-2 text-xl tracking-tight font-bold text-black md:text-2xl">
+            {experiment}
+            </p>
+
+            {observations.map( (item) => (
+            <Observation observation={item} />
+            ))}
+
+            <div class="p-2"></div>
+        
+        </div>
+
     )
 
 

@@ -10,7 +10,7 @@ const BackendAPI = axios.create({
   //Local development
   //baseURL: "http://localhost:5000/v1/",
   //Production
-  baseURL: "https://experimenter-api.onrender.com/v1/"
+  baseURL: "https://api.tryexperimenter.com/v1/"
 });
 
 export { BackendAPI };

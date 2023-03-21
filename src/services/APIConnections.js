@@ -7,7 +7,10 @@ import axios from "axios";
 /*Create an instance of axios for connecting to a specific URL*/
 const BackendAPI = axios.create({
   timeout: 10000, /*time in ms*/
-  baseURL: "http://localhost:5000/v1/",
+  //Local development
+  //baseURL: "http://localhost:5000/v1/",
+  //Production
+  baseURL: "https://experimenter-api.onrender.com/v1/"
 });
 
 export { BackendAPI };

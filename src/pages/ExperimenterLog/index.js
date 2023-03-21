@@ -63,7 +63,7 @@ const ExperimenterLog = () => {
       <p class="my-2 text-xl tracking-tight text-gray-500 md:text-2xl">
       Hi {experimenterLog.first_name}. Welcome to Day {experimenterLog.days_of_experimenting} of your experimenting journey.
       </p>
-      <div class="pb-5"></div>
+      <div class="pb-6"></div>
 
     {/*Display Experiment Groups > Experiment Sub Groups > Experiments > Observations we have data for*/}  
       {experimenterLog.experiment_groups.map( (item) => (

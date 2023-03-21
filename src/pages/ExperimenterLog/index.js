@@ -61,7 +61,7 @@ const ExperimenterLog = () => {
       </h1>    
       <div class="p-1"></div>
       <p class="my-2 text-xl tracking-tight text-gray-500 md:text-2xl">
-      Welcome back, {experimenterLog.first_name}. It's Day X of your experimenting journey.
+      Hi {experimenterLog.first_name}. Welcome to Day {experimenterLog.days_of_experimenting} of your experimenting journey.
       </p>
       <div class="pb-5"></div>
 

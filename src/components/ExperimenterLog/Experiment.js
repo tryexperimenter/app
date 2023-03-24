@@ -8,7 +8,7 @@ const Experiment = ({experiment, observations}) => {
     console.log("Observations")
     console.log(observations)
 
-    if (observations == "None") {
+    if (observations === "None") {
         return (
             <div>
 

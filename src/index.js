@@ -3,11 +3,24 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+//honeybadger.io for error handling
+//https://docs.honeybadger.io/lib/javascript/integration/react/
+import { Honeybadger, HoneybadgerErrorBoundary } from '@honeybadger-io/react'
+
+// Configure Honeybadger
+const honeybadger = Honeybadger.configure({
+  apiKey: process.env.REACT_APP_HONEYBADGER_API_KEY,
+  environment: process.env.REACT_APP_ENVIRONMENT,
+  revision: 'git SHA/project version',
+})
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <HoneybadgerErrorBoundary honeybadger={honeybadger}>
+      <App />
+    </HoneybadgerErrorBoundary>
   </React.StrictMode>
 );
 

@@ -2,7 +2,6 @@
 Logic: https://dev.to/nagatodev/consuming-rest-api-in-react-with-axios-7j3
 */
 
-
 import { BackendAPI } from "services/APIConnections.js"; //Import our axios function to access the API
 import { Honeybadger } from '@honeybadger-io/react'
 
@@ -15,7 +14,7 @@ async function getExperimenterLog({
   //Set up API call and initialize dictionary of the response from the API
 
   const endpoint_stub = "experimenter-log/?log_id=" + log_id
-  const endpoint = BackendAPI.defaults.baseURL + "/" + endpoint_stub
+  const endpoint = BackendAPI.defaults.baseURL + endpoint_stub
   
   var dict_base_response = {
     endpoint: endpoint,

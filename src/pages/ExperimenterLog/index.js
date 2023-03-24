@@ -83,7 +83,24 @@ const ExperimenterLog = () => {
   if (error)
     return ErrorPage({message_for_user: errorMessage})
 
-  //Return page
+  //No experiments to display
+  if (experimenterLog.experiments_to_display === "False")
+    return (
+      <div class="container mx-auto px-10 py-10">
+        <h1 class="my-2 text-3xl font-bold tracking-tight text-black md:text-5xl"> 
+        Experimenter Log
+        </h1>    
+        <div class="p-1"></div>
+        <p class="my-2 text-xl tracking-tight text-gray-500 md:text-2xl">
+        Hi {experimenterLog.first_name}. It looks like you don't have any experiments to display yet.
+        <br></br>
+        <br></br>
+        Please check back later or reach out to support@tryexperimenter.com if you think this is an error.
+        </p>
+      </div>
+    )
+
+  //Otherwise, display the experiments
   return (
     <div class="container mx-auto px-10 py-10">
       <h1 class="my-2 text-3xl font-bold tracking-tight text-black md:text-5xl"> 
@@ -101,9 +118,7 @@ const ExperimenterLog = () => {
           experiment_group={item.experiment_group} 
           experiment_sub_groups={item.experiment_sub_groups} />
       ))}
-
     </div>
-    
   )
 }
 

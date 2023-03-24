@@ -14,7 +14,7 @@ async function getExperimenterLog({
 
   //Set up API call and initialize dictionary of the response from the API
 
-  const endpoint_stub = "experimenter-loggg/?log_id=" + log_id
+  const endpoint_stub = "experimenter-log/?log_id=" + log_id
   const endpoint = BackendAPI.defaults.baseURL + "/" + endpoint_stub
   
   var dict_base_response = {

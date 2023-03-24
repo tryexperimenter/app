@@ -1,7 +1,6 @@
 import React from "react";
 
-const ErrorPage = () => {
-
+function ErrorPage({message_for_user = null}) {
   return (
     <html>
       {/* Background */}
@@ -14,11 +13,20 @@ const ErrorPage = () => {
               Oops...
             </h1>
             <p class="content-text text-lg sm:text-xl mt-6 text-white">
-              It looks like we've run into some technical difficulties.
-              <br></br>
-              <br></br>
-              Please try again in a little while and contact support@tryexperimenter.com if you continue to see this page.
+              It looks like we've run into some technical difficulties. Please try again in a little while.
             </p>
+            {message_for_user === null ?
+              <p class="content-text text-lg sm:text-xl mt-6 text-white">
+              If the problem persists, please contact support@tryexperimenter.com.
+              </p>
+              :
+              <p class="content-text text-lg sm:text-xl mt-6 text-white">
+              If the problem persists, please contact support@tryexperimenter.com and include the following message:
+              <br></br>
+              <br></br>
+              {message_for_user}
+              </p>
+            }
           </div>
         </div>
       </div>

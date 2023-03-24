@@ -11,13 +11,15 @@ async function getExperimenterLog({
   log_id = null,
 }) {
 
-  const endpoint = "experimenter-log/?log_id=" + log_id
+  const endpoint_stub = "experimenter-log/?log_id=" + log_id
 
-  console.log("Calling getExperimenterLog at endpoint:" + endpoint);
+  const endpoint = BackendAPI.defaults.baseURL + "/" + endpoint_stub
+
+  console.log("Calling endpoint:" + endpoint);
   
   //Initialize dictionary of the response from the API
   var dict_base_response = {
-    endpoint: "BackendAPI/" + endpoint,
+    endpoint: endpoint,
     request_type: 'get',
     response_status: null,
     data: null,
@@ -27,7 +29,7 @@ async function getExperimenterLog({
   /*Call the API and return an updated dict_response.
   Note: We use await so that we wait until we've finished executing this code to continue executing later code.*/
   
-  var dict_response = await BackendAPI.get(endpoint)
+  var dict_response = await BackendAPI.get(endpoint_stub)
     /*If API returns successfully, log the response, update the response_dict, and return it to the variable we're creating.*/
     .then((response) => {
       console.log("Response:");

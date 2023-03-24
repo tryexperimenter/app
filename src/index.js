@@ -10,7 +10,7 @@ import { Honeybadger, HoneybadgerErrorBoundary } from '@honeybadger-io/react'
 // Configure Honeybadger
 const honeybadger = Honeybadger.configure({
   apiKey: process.env.REACT_APP_HONEYBADGER_API_KEY,
-  environment: process.env.REACT_APP_ENVIRONMENT,
+  environment: process.env.REACT_APP_HONEYBADGER_ENVIRONMENT, //'production' means that honeybadger will send errors to the honeybadger.io dashboard, 'development' means honeybadger will not send errors to the honeybadger.io dashboard
   revision: 'git SHA/project version',
 })
 

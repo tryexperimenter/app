@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom"
 import { getExperimenterLog } from "services/ExperimenterLog"
 import { ExperimentGroup } from "components/ExperimenterLog/ExperimentGroup"
 import { LoadingPage } from "components/LoadingPage"
+import { ErrorPage } from "pages/ErrorPage"
 
 /* Source: https://christophergs.com/tutorials/ultimate-fastapi-tutorial-pt-12-react-js-frontend/*/
 
@@ -13,6 +14,7 @@ const ExperimenterLog = () => {
 
   /*Create variables that we'll be updating, update methods.*/
   const [loading, setLoading] = useState(true)
+  const [apiError, setAPIError] = useState(false)
   const [experimenterLog, setExperimenterLog] = useState([])
 
   /*Get Observations*/
@@ -35,14 +37,21 @@ const ExperimenterLog = () => {
     .then((response) => {
 
       //Log response
-      console.log("Response from getExperimenterLog:")
+      console.log("Response from getExperimenterLog():")
       console.log(response)
 
-      //Set observations
-      setExperimenterLog(response.data)
+      //Set error if we have one
+      if (response.api_error) {
+        console.log("Setting apiError = true")
+        setAPIError(true)
+        setLoading(false) //Update loading to false since we have a response now
+        return
+      }
 
-      //Update loading to false since we have data now
-      setLoading(false)
+      //Otherwise, set experimenterLog with the data we got back
+      console.log("Setting experimenterLog with response.data")
+      setExperimenterLog(response.data)
+      setLoading(false) //Update loading to false since we have a response now
 
     })
 
@@ -50,9 +59,13 @@ const ExperimenterLog = () => {
 
   /*Display page to users.*/
 
-  //Return loading page until we have data...
+  //Return loading page until we have a response from getExperimenterLog()...
   if (loading)
     return <LoadingPage />
+
+  //Return error page if we have an error...
+  if (apiError)
+    return <ErrorPage />
 
   //Return page
   return (

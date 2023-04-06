@@ -11,7 +11,7 @@ const ExperimentGroup = ({experiment_group, experiment_sub_groups}) => {
             <ExperimentSubGroup
                 experiment_group = {experiment_group}
                 experiment_sub_group={item.experiment_sub_group} 
-                experiment_sub_group_assigned_date={item.experiment_sub_group_assigned_date}
+                experiment_sub_group_display_date={item.experiment_sub_group_display_date}
                 experiments={item.experiments} />
             ))}
         </div>   

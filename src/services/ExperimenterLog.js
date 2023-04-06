@@ -8,12 +8,12 @@ import { Honeybadger } from '@honeybadger-io/react'
 /*getExperimenterLog
 Note: We create an async function so that we can use "await" within the function.*/
 async function getExperimenterLog({
-  log_id = null,
+  public_user_id = null,
 }) {
 
   //Set up API call and initialize dictionary of the response from the API
 
-  const endpoint_stub = "experimenter-log/?log_id=" + log_id
+  const endpoint_stub = "experimenter-log/?public_user_id=" + public_user_id
   const endpoint = BackendAPI.defaults.baseURL + endpoint_stub
   
   var dict_base_response = {

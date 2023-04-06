@@ -11,7 +11,7 @@ class App extends Component {
         <BrowserRouter>
           <Routes>
             <Route path="/format" element={<FormattingWork />} />
-            <Route path="/log/:log_id" element={<ExperimenterLog />} />
+            <Route path="/:public_user_id" element={<ExperimenterLog />} />
             <Route path="*" element={<URLNotFound />} />
           </Routes>
         </BrowserRouter>

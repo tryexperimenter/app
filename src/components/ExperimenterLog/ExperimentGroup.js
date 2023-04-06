@@ -3,7 +3,10 @@ import { ExperimentSubGroup } from "components/ExperimenterLog/ExperimentSubGrou
 
 const ExperimentGroup = ({experiment_group, experiment_sub_groups}) => {
     
-    console.log(experiment_sub_groups)
+    console.log("Experiment Group")
+    console.log(experiment_group)
+    console.log("Experiment Sub Groups")
+    console.log(experiment_sub_groups)    
 
     return (
         <div>

@@ -12,6 +12,8 @@ const Experiment = ({experiment, observations}) => {
     // We need to sanitize the HTML before we render it using dangerouslySetInnerHTML (necessary because we are delivering the HTML from the database)
     const sanitized_experiment = DOMPurify.sanitize(experiment);
 
+    // If there are no observations, we don't want to render the Observation component
+    // Note: there are no observation prompts or observations for the experiment, our API returns observations = "None"
     if (observations === "None") {
         return (
             <div>
@@ -26,6 +28,7 @@ const Experiment = ({experiment, observations}) => {
         )
     }
 
+    // Otherwise, we want to render the Observation component
     return (
 
         <div>

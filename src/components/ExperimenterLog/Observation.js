@@ -11,7 +11,13 @@ const Observation = ({observation}) => {
     // We need to sanitize the HTML before we render it using dangerouslySetInnerHTML (necessary because we are delivering the HTML from the database)
     const sanitized_observation_prompt = DOMPurify.sanitize(observation.observation_prompt);
     const sanitized_observation = DOMPurify.sanitize(observation.observation);
-    
+
+    // If there there is no observation for an observation prompt, don't display anything other than the experiment
+    if (sanitized_observation === "") {
+        return (<div></div>)
+    }
+
+    // If there is an observation, display the observation prompt and observation
     return (
         <div>
             <div class="p-0.5"></div>

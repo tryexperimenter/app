@@ -4,10 +4,10 @@ import DOMPurify from 'isomorphic-dompurify';
 
 const ExperimentSubGroup = ({experiment_group, experiment_sub_group, experiment_sub_group_display_date, experiments}) => {
 
-    console.log("Experiment Group")
-    console.log(experiment_group)
-    console.log("Experiment Sub Group")
-    console.log(experiment_sub_group)
+    // console.log("Experiment Group")
+    // console.log(experiment_group)
+    // console.log("Experiment Sub Group")
+    // console.log(experiment_sub_group)
 
     // We need to sanitize the HTML before we render it using dangerouslySetInnerHTML (necessary because we are delivering the HTML from the database)
     const sanitized_experiment_group = DOMPurify.sanitize(experiment_group);

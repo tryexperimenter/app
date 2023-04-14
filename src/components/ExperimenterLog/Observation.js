@@ -3,10 +3,10 @@ import DOMPurify from 'isomorphic-dompurify';
 
 const Observation = ({observation}) => {
 
-    console.log("Observation Prompt")
-    console.log(observation.observation_prompt)
-    console.log("Observation")
-    console.log(observation.observation)
+    // console.log("Observation Prompt")
+    // console.log(observation.observation_prompt)
+    // console.log("Observation")
+    // console.log(observation.observation)
 
     // We need to sanitize the HTML before we render it using dangerouslySetInnerHTML (necessary because we are delivering the HTML from the database)
     const sanitized_observation_prompt = DOMPurify.sanitize(observation.observation_prompt);

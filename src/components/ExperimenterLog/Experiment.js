@@ -4,10 +4,10 @@ import DOMPurify from 'isomorphic-dompurify';
 
 const Experiment = ({experiment, observations}) => {
     
-    console.log("Experiment")
-    console.log(experiment)
-    console.log("Observations")
-    console.log(observations)
+    // console.log("Experiment")
+    // console.log(experiment)
+    // console.log("Observations")
+    // console.log(observations)
 
     // We need to sanitize the HTML before we render it using dangerouslySetInnerHTML (necessary because we are delivering the HTML from the database)
     const sanitized_experiment = DOMPurify.sanitize(experiment);

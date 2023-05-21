@@ -10,7 +10,7 @@ const URLNotFound = () => {
               Page Not Found :(
             </h1>
             <p class="content-text text-lg mt-6 text-white">
-              Sorry, but we don't recognize the page you're trying to visit. Please reach out to support@tryexperimenter.com for assistance or visit <a href="tryexperimenter.com">tryexperimenter.com</a>.
+              Sorry, but we don't recognize the page you're trying to visit. Please reach out to support@tryexperimenter.com for assistance or visit <a href="https://tryexperimenter.com">tryexperimenter.com</a>.
             </p>
           </div>
         </div>

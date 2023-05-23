@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
-import { getExperimenterLog } from "services/ExperimenterLog"
+import { BackendAPIDataService } from "services/BackendAPIDataService"
 import { Group } from "components/ExperimenterLog/Group"
 import { LoadingPage } from "components/LoadingPage"
 import { ErrorPage } from "pages/ErrorPage"
@@ -35,19 +35,21 @@ const ExperimenterLog = () => {
     //setLoading(true)
 
     //Using API
-    console.log("Calling getExperimenterLog()");
-    getExperimenterLog({
-      public_user_id: public_user_id,
+    console.log("Calling BackendAPI to get ExperimenterLog data()");
+    BackendAPIDataService({
+      endpoint_stub: "experimenter-log/?public_user_id=" + public_user_id,
+      request_type: "get",
+      payload: null,
     })
     
     .then((response) => {
 
       //Log response
-      console.log("Response from getExperimenterLog():")
+      console.log("Response from BackendAPI:")
       console.log(response)
 
       //No response from the API
-      if (response.api_error) {
+      if (response.successful_request === false) {
         console.log("Setting error = true")
         setError(true)
         setErrorMessage(null)

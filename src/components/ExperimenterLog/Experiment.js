@@ -2,7 +2,7 @@ import React from "react";
 import { Observation } from "components/ExperimenterLog/Observation"
 import DOMPurify from 'isomorphic-dompurify';
 
-const Experiment = ({experiment_prompt, observations}) => {
+const Experiment = ({public_user_id, experiment_prompt, observations}) => {
     
     // console.log("Experiment")
     // console.log(experiment_prompt)
@@ -38,7 +38,9 @@ const Experiment = ({experiment_prompt, observations}) => {
             </p>
 
             {observations.map( (item) => (
-            <Observation observation={item} />
+            <Observation
+              public_user_id={public_user_id}
+              observation={item} />
             ))}
 
             <div class="p-2"></div>

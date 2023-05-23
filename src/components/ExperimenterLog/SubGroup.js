@@ -2,7 +2,7 @@ import React from "react";
 import { Experiment } from "components/ExperimenterLog/Experiment"
 import DOMPurify from 'isomorphic-dompurify';
 
-const SubGroup = ({group_name, sub_group_name, sub_group_display_date, experiments}) => {
+const SubGroup = ({public_user_id, group_name, sub_group_name, sub_group_display_date, experiments}) => {
 
     // console.log("Group Name")
     // console.log(group_name)
@@ -28,6 +28,7 @@ const SubGroup = ({group_name, sub_group_name, sub_group_display_date, experimen
 
             {experiments.map( (item) => (
             <Experiment
+                public_user_id={public_user_id}
                 experiment_prompt={item.experiment_prompt} 
                 observations={item.observations} />
             ))}

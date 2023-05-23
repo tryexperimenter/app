@@ -10,7 +10,7 @@ UI: https://www.creative-tim.com/learning-lab/tailwind-starter-kit/landing
 */
 
 import React, { useState } from "react";
-import { SubmitObservation } from "services/BackendAPIDataService.js";
+import { BackendAPIDataService } from "services/BackendAPIDataService"
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 
@@ -42,7 +42,10 @@ function FailedSubmissionMsg() {
   );
 }
 
-export default function ObservationForm() {
+const ObservationForm = ({
+  public_user_id,
+  observation_prompt_id
+}) => {
   /*Track whether we have a Successful Submission or not so we can display the appropriate message.*/
   const [isSuccessfulSubmission, setIsSuccessfulSubmission] = useState(false);
   const [isFailedSubmission, setIsFailedSubmission] = useState(false);
@@ -60,18 +63,35 @@ export default function ObservationForm() {
       })}
       /*Define actions when the form is submitted.*/
       onSubmit={async (values, actions) => {
+
+        /*Add metadata to values object.*/
+        values["observation_prompt_id"] = observation_prompt_id
+        values["public_user_id"] = public_user_id
+
+        /*Create "visibility" entry in values dictionary to match the format expected by the API. Delete "share_annonymously" entry.*/
+        if (values["share_annonymously"] === true) {
+          values["visibility"] = "public_anonymous";
+        }
+        else {
+          values["visibility"] = "private";
+        }
+        delete values["share_annonymously"];
+
         /*Send user entered values to API and save the resulting response.
-        Await enables us to wait to execute any additional code until we get this response_dict back.*/
-        var response_dict = await SubmitObservation({
+        Await enables us to wait to execute any additional code until we get the response back (and to use await elsewhere in this component).*/
+        console.log("ObservationForm: submit form data to the BackendAPI");
+
+        var dict_response = await BackendAPIDataService({
+          endpoint_stub: "submit-observation",
           request_type: "post",
           payload: values,
         });
 
-        console.log("response_dict returned to ObservationForm component:");
-        console.log(response_dict);
+        console.log("ObservationForm: dict_response returned to component:");
+        console.log(dict_response);
 
         /*Set submission status and amount of time to show success/failure message.*/
-        if (response_dict["response_status"] === "success") {
+        if (dict_response.successful_request === true) {
           setIsSuccessfulSubmission(true);
           await seconds_to_sleep(2);
           setIsSuccessfulSubmission(false);
@@ -154,3 +174,5 @@ export default function ObservationForm() {
     </Formik>
   );
 }
+
+export { ObservationForm }

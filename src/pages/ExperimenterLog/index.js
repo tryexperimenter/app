@@ -115,6 +115,7 @@ const ExperimenterLog = () => {
     {/*Display Groups > Sub Groups > Experiments > Observations we have data for*/}  
       {experimenterLog.groups.map( (item) => (
         <Group 
+          public_user_id={public_user_id}
           group_name={item.group_name} 
           sub_groups={item.sub_groups} />
       ))}

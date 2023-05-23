@@ -1,7 +1,8 @@
 import React from "react";
 import DOMPurify from 'isomorphic-dompurify';
+import { ObservationForm } from "components/UserInputs/ObservationForm"
 
-const Observation = ({observation}) => {
+const Observation = ({public_user_id, observation}) => {
 
     // console.log("Observation Prompt")
     // console.log(observation.observation_prompt)
@@ -27,6 +28,9 @@ const Observation = ({observation}) => {
             <p class="my-2 text-l tracking-tight text-gray-500 md:text-xl">
                 <span dangerouslySetInnerHTML={{__html: sanitized_observation}} />
             </p>
+            <ObservationForm 
+                public_user_id={public_user_id}
+                observation_prompt_id={observation.observation_prompt_id} />
         </div>
         
     )

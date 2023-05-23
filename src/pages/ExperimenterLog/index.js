@@ -44,13 +44,11 @@ const ExperimenterLog = () => {
     
     .then((response) => {
 
-      //Log response
-      console.log("Response from BackendAPI:")
-      console.log(response)
+      console.log("Received response from BackendAPI")
 
       //No response from the API
       if (response.successful_request === false) {
-        console.log("Setting error = true")
+        console.log("No response from the API; Setting error = true")
         setError(true)
         setErrorMessage(null)
         setLoading(false) //Update loading to false since we have a response now
@@ -59,7 +57,7 @@ const ExperimenterLog = () => {
 
       //API returned a response but indicated an error
       if (response.data.error === "True") {
-        console.log("Setting error = true")
+        console.log("API returned a response but indicated an error; Setting error = true; errorMessage = " + response.data.end_user_error_message)
         setError(true)
         setErrorMessage(response.data.end_user_error_message)
         setLoading(false) //Update loading to false since we have a response now

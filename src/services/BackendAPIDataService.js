@@ -71,8 +71,6 @@ async function BackendAPIDataService({
   /*Successful Request: Log*/
   if (dict_response["successful_request"] === true) {
     console.log("Successful API Request")
-    console.log("dict_response:")
-    console.log(dict_response)
   }
 
   /*Failed Request: Log and Notify Honeybadger*/
@@ -82,8 +80,6 @@ async function BackendAPIDataService({
   if (dict_response["successful_request"] === false) {
 
     console.log("Failed API Request")
-    console.log("dict_response:")
-    console.log(dict_response)
 
     const error_class = "App:Services:BackendAPIDataService()"
     const error_message = "API Error (endpoint: " + endpoint + "):"
@@ -122,6 +118,8 @@ async function BackendAPIDataService({
   /*Return the response*/
   //Note that if none of the if statements above are triggered, then the dict_response will be returned as is with dict_response["successful_request"] = false
   console.log("Returning the dict_response")
+  console.log("dict_response:")
+  console.log(dict_response)
   return dict_response;
 
 }

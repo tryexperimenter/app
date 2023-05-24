@@ -9,7 +9,7 @@ const SubGroup = ({public_user_id, group_name, sub_group_name, sub_group_display
     // console.log("Sub Group Name")
     // console.log(sub_group_name)
 
-    // We need to sanitize the HTML before we render it using dangerouslySetInnerHTML (necessary because we are delivering the HTML from the database)
+    // We need to sanitize HTML that is dynamically generated (not explicitly written in code) to ensure we don't render any malicous HTML (the values we are pulling from the database could be user generated (and not previously sanitized) and often contain HTML (e.g., to render curly quotes))
     const sanitized_group_name = DOMPurify.sanitize(group_name);
     const sanitized_sub_group_name = DOMPurify.sanitize(sub_group_name);
 

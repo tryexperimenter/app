@@ -9,7 +9,7 @@ const Observation = ({public_user_id, observation}) => {
     // console.log("Observation")
     // console.log(observation.observation)
 
-    // We need to sanitize the HTML before we render it using dangerouslySetInnerHTML (necessary because we are delivering the HTML from the database)
+    // We need to sanitize HTML that is dynamically generated (not explicitly written in code) to ensure we don't render any malicous HTML (the values we are pulling from the database could be user generated (and not previously sanitized) and often contain HTML (e.g., to render curly quotes))
     const sanitized_observation_prompt = DOMPurify.sanitize(observation.observation_prompt);
     const sanitized_observation = DOMPurify.sanitize(observation.observation);
 

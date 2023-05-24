@@ -9,7 +9,7 @@ const Experiment = ({public_user_id, experiment_prompt, observations}) => {
     // console.log("Observations")
     // console.log(observations)
 
-    // We need to sanitize the HTML before we render it using dangerouslySetInnerHTML (necessary because we are delivering the HTML from the database)
+    // We need to sanitize HTML that is dynamically generated (not explicitly written in code) to ensure we don't render any malicous HTML (the values we are pulling from the database could be user generated (and not previously sanitized) and often contain HTML (e.g., to render curly quotes))
     const sanitized_experiment_prompt = DOMPurify.sanitize(experiment_prompt);
 
     // If there are no observations, we don't want to render the Observation component

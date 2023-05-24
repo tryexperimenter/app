@@ -10,9 +10,10 @@ UI: https://www.creative-tim.com/learning-lab/tailwind-starter-kit/landing
 */
 
 import React, { useState } from "react";
-import { BackendAPIDataService } from "services/BackendAPIDataService"
+import DOMPurify from 'isomorphic-dompurify';
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import { BackendAPIDataService } from "services/BackendAPIDataService"
 
 /*Enable us to use a sleep function*/
 const seconds_to_sleep = (seconds) =>
@@ -52,33 +53,45 @@ const ObservationForm = ({
 
   return (
     <Formik
+
       /*These are the values that are filled out in the form when it initially loads and each time it resets.*/
       initialValues={{
         observation: "",
-        share_annonymously: true,
+        share_anonymously: true,
       }}
+
       /*Define form validation rules and error messages to display.*/
       validationSchema={Yup.object().shape({
         observation: Yup.string(),
       })}
+
       /*Define actions when the form is submitted.*/
       onSubmit={async (values, actions) => {
 
-        /*Add metadata to values object.*/
+        console.log("ObservationForm: values before processing:");
+        console.log(values);
+
+        //Add metadata to values object.
         values["observation_prompt_id"] = observation_prompt_id
         values["public_user_id"] = public_user_id
 
-        /*Create "visibility" entry in values dictionary to match the format expected by the API. Delete "share_annonymously" entry.*/
-        if (values["share_annonymously"] === true) {
+        //Create "visibility" entry in values dictionary to match the format expected by the API. Delete "share_anonymously" entry.
+        if (values["share_anonymously"] === true) {
           values["visibility"] = "public_anonymous";
         }
         else {
           values["visibility"] = "private";
         }
-        delete values["share_annonymously"];
+        delete values["share_anonymously"];
 
-        /*Send user entered values to API and save the resulting response.
-        Await enables us to wait to execute any additional code until we get the response back (and to use await elsewhere in this component).*/
+        //Sanitize user input for malicious HTML https://github.com/cure53/DOMPurify
+        values["observation"] = DOMPurify.sanitize(values["observation"]);
+
+        console.log("ObservationForm: values after processing:");
+        console.log(values);
+
+        //Send user entered values to API and save the resulting response.
+        //Await enables us to wait to execute any additional code until we get the response back (and to use await elsewhere in this component).
         console.log("ObservationForm: submit form data to the BackendAPI");
 
         var dict_response = await BackendAPIDataService({
@@ -138,13 +151,14 @@ const ObservationForm = ({
                     <label
                       class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
                       htmlFor="share_anonymously"
+                      type="checkbox"
                     >
                       Share Anonymously
                     </label>
                     <Field
                       id="share_anonymously"
                       name="share_anonymously"
-                      component="checkbox"
+                      type='checkbox'
                       class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                     />
                     <ErrorMessage

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
+import { Honeybadger } from '@honeybadger-io/react'
 import { BackendAPIDataService } from "services/BackendAPIDataService"
 import { Group } from "components/ExperimenterLog/Group"
 import { LoadingPage } from "components/LoadingPage"
@@ -34,42 +35,67 @@ const ExperimenterLog = () => {
     //Set loading to true (in case we're calling this function again)
     //setLoading(true)
 
-    //Using API
-    console.log("Calling BackendAPI to get ExperimenterLog data()");
+    //Getting ExperimenterLog Data
+    console.log("Getting ExperimenterLog Data");
     BackendAPIDataService({
       endpoint_stub: "experimenter-log/?public_user_id=" + public_user_id,
-      request_type: "get",
+      request_type: "GET",
       payload: null,
     })
     
-    .then((response) => {
+    .then((dict_response) => {
 
-      console.log("Received response from BackendAPI")
+      console.log("Received response from BackendAPIDataService")
 
-      //No response from the API
-      if (response.successful_request === false) {
-        console.log("No response from the API; Setting error = true")
+      //API returned a response...
+      if (dict_response.successful_api_request === true) {
+
+        //And indicated success
+        if (dict_response.api_response.data.status === "success") {
+      
+          console.log("Success: calling setExperimenterLog()")
+          setExperimenterLog(dict_response.api_response.data)
+          setLoading(false) //Update loading to false since we have a response now
+
+        }
+
+        //And indicated failure
+        else {
+          console.log("Failure: API returned a response but indicated an error; end_user_error_message: " + dict_response.api_response.data.end_user_error_message)
+          setError(true)
+          setErrorMessage(dict_response.api_response.data.end_user_error_message)
+          setLoading(false) //Update loading to false since we have a response now
+          return
+        }
+
+      }
+
+      //Failed API request
+      else {
+        console.log("Failure: No response from the API or other issue")
         setError(true)
         setErrorMessage(null)
         setLoading(false) //Update loading to false since we have a response now
         return
       }
 
-      //API returned a response but indicated an error
-      if (response.data.error === "True") {
-        console.log("API returned a response but indicated an error; Setting error = true; errorMessage = " + response.data.end_user_error_message)
-        setError(true)
-        setErrorMessage(response.data.end_user_error_message)
-        setLoading(false) //Update loading to false since we have a response now
-        return
-      }
-
-      //Otherwise, set experimenterLog with the data we got back
-      console.log("Setting experimenterLog with response.data")
-      setExperimenterLog(response.data)
-      setLoading(false) //Update loading to false since we have a response now
-
     })
+
+    //Error with BackendAPIDataService
+    .catch((error) => {
+
+      const error_class = "App:Services:BackendAPIDataService()"
+      const error_message = "Error calling BackendAPIDataService() in ExperimenterLog/index.js"
+      console.log("Error Class: " + error_class)
+      console.log("Error Message: " + error_message)
+      Honeybadger.notify(error_message, error_class)
+
+      setError(true)
+      setErrorMessage(null)
+      setLoading(false) //Update loading to false since we have a response now
+      return
+      
+    });
 
   }
 

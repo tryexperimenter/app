@@ -96,7 +96,7 @@ const ObservationForm = ({
 
         var dict_response = await BackendAPIDataService({
           endpoint_stub: "submit-observation",
-          request_type: "post",
+          request_type: "POST",
           payload: values,
         });
 
@@ -104,8 +104,8 @@ const ObservationForm = ({
         console.log(dict_response);
 
         /*Set submission status and amount of time to show success/failure message.*/
-        if (dict_response.successful_request === true && 
-            dict_response.response.data.status === "success") {
+        if (dict_response.successful_api_request === true && 
+            dict_response.api_response.data.status === "success") {
           setIsSuccessfulSubmission(true);
           await seconds_to_sleep(2);
           setIsSuccessfulSubmission(false);
@@ -117,6 +117,7 @@ const ObservationForm = ({
 
         /*Reset form for another submission.*/
         actions.resetForm();
+
       }}
     >
       {() => (

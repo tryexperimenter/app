@@ -12,74 +12,79 @@ async function BackendAPIDataService({
   payload = null,
 }) {
 
-  //Set up API call and initialize dictionary of the response from the API
+  console.log("BackendAPIDataService() called")
 
+  //Prepare API call
   const endpoint = BackendAPI.defaults.baseURL + endpoint_stub
-  
-  let dict_response = {
-    endpoint: endpoint,
-    request_type: request_type,
-    successful_request: false,
-    response: null,
-    data: null,
-    error: null,
-  };
 
-  /*Call the API and return the response
-  Note: We use await so that we wait until we've finished executing this code to continue executing later code.*/
+  console.log("endpoint: " + endpoint)
+  console.log("request_type: " + request_type)
+  console.log("payload: " + payload)
+
+  //Initialize dict_response
+  var dict_response = {successful_api_request: false}
+
+  //Call API
+  //Note: We use await so that we wait until we've finished executing this code to continue executing later code.*/
 
   /*GET*/
-  if (request_type === "get") {
+  if (request_type === "GET") {
 
     console.log("Making GET request to: " + endpoint);
 
     dict_response = await BackendAPI.get(endpoint_stub)
-      /*Success: If API returns successfully, log the response, update the response_dict, and return it to the variable we're creating.*/
+
+      //Success
       .then((response) => {
-        dict_response["successful_request"] = true;
-        dict_response["data"] = response.data;
-        return dict_response;
+
+        return {successful_api_request: true, api_response: response};
       })
-      /*Failure: If API returns an error (or API request times out because API is not accessible), record the error for further processing.*/
-      .catch(function (error) {
-        dict_response["successful_request"] = false;
-        dict_response["error"] = error;
-        return dict_response;
+
+      //Failure (non-2xx response or API request timed out)
+      .catch((error) => {
+
+        return {successful_api_request: false, error: error};
+        
       });
+
   }
 
   /*POST*/
-  if (request_type === "post") {
+  if (request_type === "POST") {
 
     console.log("Making POST request to: " + endpoint);
 
     dict_response = await BackendAPI.post(endpoint_stub, payload)
-      /*Success: If API returns successfully, log the response, update the response_dict, and return it to the variable we're creating.*/
+
+      //Success
       .then((response) => {
-        dict_response["successful_request"] = true;
-        dict_response["response"] = response;
-        return dict_response;
+
+        return {successful_api_request: true, api_response: response};
       })
-      /*Failure: If API returns an error (or API request times out because API is not accessible), record the error for further processing.*/
-      .catch(function (error) {
-        dict_response["successful_request"] = false;
-        dict_response["error"] = error;
-        return dict_response;
+
+      //Failure (non-2xx response or API request timed out)
+      .catch((error) => {
+
+        return {successful_api_request: false, error: error};
+        
       });
+
   }
 
   /*Successful Request: Log*/
-  if (dict_response["successful_request"] === true) {
+  if (dict_response.successful_api_request === true) {
     console.log("Successful API Request")
+    console.log(dict_response.api_response)
   }
 
   /*Failed Request: Log and Notify Honeybadger*/
   /*Situations: API returns an error OR API request times out because API is not accessible*/
   //Note that the honeybadger.io error boundary is not triggered since we caught the error above, so manually logging it here
   //https://axios-http.com/docs/handling_errors
-  if (dict_response["successful_request"] === false) {
+  if (dict_response.successful_api_request === false) {
 
     console.log("Failed API Request")
+    console.log(dict_response.error)
 
     const error_class = "App:Services:BackendAPIDataService()"
     const error_message = "API Error (endpoint: " + endpoint + "):"

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import DOMPurify from 'isomorphic-dompurify';
 import { Observation } from "components/ExperimenterLog/Observation"
+import { Toggle } from "components/UserInputs/Toggle"
 
 
 const Experiment = ({public_user_id, experiment_prompt, observations}) => {
@@ -42,17 +43,7 @@ const Experiment = ({public_user_id, experiment_prompt, observations}) => {
                 <span dangerouslySetInnerHTML={{__html: sanitized_experiment_prompt}} />
                 </p>
 
-                <label className="flex items-center">
-                    <input
-                    type="checkbox"
-                    checked={showObservations}
-                    onChange={() => setShowObservations(!showObservations)}
-                    className="form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out"
-                    />
-                    <span className="ml-2 text-sm leading-5">
-                    Show Observations
-                    </span>
-                </label>
+                < Toggle isOn={showObservations} setIsOn={setShowObservations} label={"Show Observations"} />
 
                     {observations.map( (item) => (
                     <Observation
@@ -76,17 +67,7 @@ const Experiment = ({public_user_id, experiment_prompt, observations}) => {
             <span dangerouslySetInnerHTML={{__html: sanitized_experiment_prompt}} />
             </p>
 
-            <label className="flex items-center">
-                <input
-                type="checkbox"
-                checked={showObservations}
-                onChange={() => setShowObservations(!showObservations)}
-                className="form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out"
-                />
-                <span className="ml-2 text-sm leading-5">
-                Show Observations
-                </span>
-            </label>
+            < Toggle isOn={showObservations} setIsOn={setShowObservations} label={"Show Observations"} />
 
             <div class="p-2"></div>
         

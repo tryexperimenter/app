@@ -1,6 +1,6 @@
 import React from "react";
 
-const Toggle = ({isOn, setIsOn, label}) => {
+const CheckBox = ({isOn, setIsOn, label}) => {
 
     return (
         <label className="flex items-center">
@@ -17,4 +17,4 @@ const Toggle = ({isOn, setIsOn, label}) => {
     )
 }
 
-export { Toggle }
+export { CheckBox }

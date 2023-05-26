@@ -134,7 +134,10 @@ const ExperimenterLog = () => {
       </h1>    
       <div class="p-1"></div>
       <p class="my-2 text-xl tracking-tight text-gray-500 md:text-2xl">
-      Hi {experimenterLog.first_name}. Welcome to Day {experimenterLog.days_of_experimenting} of your experimenting journey.
+      Hi {experimenterLog.first_name}! Welcome to Day {experimenterLog.days_of_experimenting} of your experimenting journey.</p>
+      <p class="my-2 text-l tracking-tight text-gray-500 md:text-xl">
+      <br></br>Your Experimenter Log is for you to keep track of the experiments you've completed and everything you've learned about what makes you happier and more successful at work.
+      <br></br><br></br> MAYBE FILL IN INSTRUCTIONS HERE... BUT IT SHOULD BE SELF EXPLANATORY. PERHAPS THERE COULD BE AN "Instructions with down arrow" that reveals more instructions if someone wants it.
       </p>
       <div class="pb-6"></div>
 
